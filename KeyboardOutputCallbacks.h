@@ -3,16 +3,18 @@
 #include "sdkconfig.h"
 #if defined(CONFIG_BT_ENABLED)
 
-#include <BLEServer.h>
-#include "BLE2902.h"
-#include "BLECharacteristic.h"
+#include "nimconfig.h"
+#if defined(CONFIG_BT_NIMBLE_ROLE_PERIPHERAL)
+#include <NimBLEServer.h>
+#include "NimBLECharacteristic.h"
 
-class KeyboardOutputCallbacks : public BLECharacteristicCallbacks
+class KeyboardOutputCallbacks : public NimBLECharacteristicCallbacks
 {
 public:
   KeyboardOutputCallbacks(void);
-  void onWrite(BLECharacteristic* me);
+  void onWrite(NimBLECharacteristic* me);
 };
 
+#endif // CONFIG_BT_NIMBLE_ROLE_PERIPHERAL
 #endif // CONFIG_BT_ENABLED
 #endif // ESP32_BLE_KEYBOARD_OUTPUT_CALLBACKS_H

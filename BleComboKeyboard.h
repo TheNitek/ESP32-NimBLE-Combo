@@ -4,8 +4,8 @@
 #if defined(CONFIG_BT_ENABLED)
 
 #include "BleConnectionStatus.h"
-#include "BLEHIDDevice.h"
-#include "BLECharacteristic.h"
+#include "NimBLEHIDDevice.h"
+#include "NimBLECharacteristic.h"
 #include "Print.h"
 
 
@@ -90,10 +90,10 @@ class BleComboKeyboard : public Print
 {
 private:
   BleConnectionStatus* connectionStatus;
-  BLEHIDDevice* hid;
-  BLECharacteristic* inputKeyboard;
-  BLECharacteristic* outputKeyboard;
-  BLECharacteristic* inputMediaKeys;
+  NimBLEHIDDevice* hid;
+  NimBLECharacteristic* inputKeyboard;
+  NimBLECharacteristic* outputKeyboard;
+  NimBLECharacteristic* inputMediaKeys;
   
   KeyReport _keyReport;
   MediaKeyReport _mediaKeyReport;
@@ -120,7 +120,7 @@ public:
   std::string deviceManufacturer;
   std::string deviceName;
 
-  BLECharacteristic* inputMouse;
+  NimBLECharacteristic* inputMouse;
 
 };
 

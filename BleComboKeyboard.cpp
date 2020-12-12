@@ -1,8 +1,7 @@
-#include <BLEDevice.h>
-#include <BLEUtils.h>
-#include <BLEServer.h>
-#include "BLE2902.h"
-#include "BLEHIDDevice.h"
+#include <NimBLEDevice.h>
+#include <NimBLEUtils.h>
+#include <NimBLEServer.h>
+#include "NimBLEHIDDevice.h"
 #include "HIDTypes.h"
 #include <driver/adc.h>
 #include "sdkconfig.h"
@@ -164,7 +163,7 @@ void BleComboKeyboard::taskServer(void* pvParameter) {
   BLEServer *pServer = BLEDevice::createServer();
   pServer->setCallbacks(bleKeyboardInstance->connectionStatus);
 
-  bleKeyboardInstance->hid = new BLEHIDDevice(pServer);
+  bleKeyboardInstance->hid = new NimBLEHIDDevice(pServer);
   bleKeyboardInstance->inputKeyboard = bleKeyboardInstance->hid->inputReport(KEYBOARD_ID); // <-- input REPORTID from report map
   bleKeyboardInstance->outputKeyboard = bleKeyboardInstance->hid->outputReport(KEYBOARD_ID);
   bleKeyboardInstance->inputMediaKeys = bleKeyboardInstance->hid->inputReport(MEDIA_KEYS_ID);
