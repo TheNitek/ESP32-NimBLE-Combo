@@ -6,94 +6,97 @@
  
 #include <BleCombo.h>
 
+BleComboKeyboard keyboard;
+BleComboMouse mouse(&keyboard);
+
 void setup() {
   Serial.begin(115200);
   Serial.println("Starting work!");
-  Keyboard.begin();
-  Mouse.begin();
+  keyboard.begin();
+  mouse.begin();
 }
 
 void loop() {
-  if(Keyboard.isConnected()) {
+  if(keyboard.isConnected()) {
     Serial.println("Sending 'Hello world'");
-    Keyboard.println("Hello World");
+    keyboard.println("Hello World");
 
     delay(1000);
     Serial.println("Sending Enter key...");
-    Keyboard.write(KEY_RETURN);
+    keyboard.write(KEY_RETURN);
 
     delay(1000);
   
     Serial.println("Sending Play/Pause media key...");
-    Keyboard.write(KEY_MEDIA_PLAY_PAUSE);
+    keyboard.write(KEY_MEDIA_PLAY_PAUSE);
 
     delay(1000);
 
     Serial.println("Sending Ctrl+Alt+Delete...");
-    Keyboard.press(KEY_LEFT_CTRL);
-    Keyboard.press(KEY_LEFT_ALT);
-    Keyboard.press(KEY_DELETE);
+    keyboard.press(KEY_LEFT_CTRL);
+    keyboard.press(KEY_LEFT_ALT);
+    keyboard.press(KEY_DELETE);
     delay(100);
-    Keyboard.releaseAll();
+    keyboard.releaseAll();
 
     unsigned long startTime;
 
     Serial.println("Move mouse pointer up");
     startTime = millis();
     while(millis()<startTime+1000) {
-      Mouse.move(0,-1);
+      mouse.move(0,-1);
       delay(5);
     }
     Serial.println("Move mouse pointer left");
     startTime = millis();
     while(millis()<startTime+1000) {
-      Mouse.move(-1,0);
+      mouse.move(-1,0);
       delay(5);
     }
 
     Serial.println("Move mouse pointer down");
     startTime = millis();
     while(millis()<startTime+1000) {
-      Mouse.move(0,1);
+      mouse.move(0,1);
       delay(5);
     }
 
     Serial.println("Move mouse pointer right");
     startTime = millis();
     while(millis()<startTime+1000) {
-      Mouse.move(1,0);
+      mouse.move(1,0);
       delay(5);
     }
     
     Serial.println("Scroll Down");
-    Mouse.move(0,0,-1);
+    mouse.move(0,0,-1);
 
     Serial.println("Left click");
-    Mouse.click(MOUSE_LEFT);
+    mouse.click(MOUSE_LEFT);
     delay(500);
 
     Serial.println("Right click");
-    Mouse.click(MOUSE_RIGHT);
+    mouse.click(MOUSE_RIGHT);
     delay(500);
 
     Serial.println("Scroll wheel click");
-    Mouse.click(MOUSE_MIDDLE);
+    mouse.click(MOUSE_MIDDLE);
     delay(500);
 
     Serial.println("Back button click");
-    Mouse.click(MOUSE_BACK);
+    mouse.click(MOUSE_BACK);
     delay(500);
 
     Serial.println("Forward button click");
-    Mouse.click(MOUSE_FORWARD);
+    mouse.click(MOUSE_FORWARD);
     delay(500);
 
     Serial.println("Click left+right mouse button at the same time");
-    Mouse.click(MOUSE_LEFT | MOUSE_RIGHT);
+    mouse.click(MOUSE_LEFT | MOUSE_RIGHT);
     delay(500);
 
     Serial.println("Click left+right mouse button and scroll wheel at the same time");
-    Mouse.click(MOUSE_LEFT | MOUSE_RIGHT | MOUSE_MIDDLE);
+    mouse.click(MOUSE_LEFT | MOUSE_RIGHT | MOUSE_MIDDLE);
     delay(500);
 
 
